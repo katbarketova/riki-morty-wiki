@@ -15,7 +15,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Riki and Morty',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.green,
+          brightness: Brightness.dark,
+        ),
+        brightness: Brightness.dark,
+        useMaterial3: true,
       ),
       home: const CharactersPage(),
     );

@@ -10,6 +10,7 @@ class CharactersState extends Equatable {
     this.nextPage = 1,
     this.hasReachedMax = false,
     this.isLoadingMore = false,
+    this.totalCount = 0,
     this.errorMessage,
   });
 
@@ -18,6 +19,7 @@ class CharactersState extends Equatable {
   final int? nextPage;
   final bool hasReachedMax;
   final bool isLoadingMore;
+  final int totalCount;
   final String? errorMessage;
 
   CharactersState copyWith({
@@ -27,6 +29,7 @@ class CharactersState extends Equatable {
     bool clearNextPage = false,
     bool? hasReachedMax,
     bool? isLoadingMore,
+    int? totalCount,
     String? errorMessage,
     bool clearErrorMessage = false,
   }) {
@@ -36,6 +39,7 @@ class CharactersState extends Equatable {
       nextPage: clearNextPage ? null : nextPage ?? this.nextPage,
       hasReachedMax: hasReachedMax ?? this.hasReachedMax,
       isLoadingMore: isLoadingMore ?? this.isLoadingMore,
+      totalCount: totalCount ?? this.totalCount,
       errorMessage: clearErrorMessage
           ? null
           : errorMessage ?? this.errorMessage,
@@ -49,6 +53,7 @@ class CharactersState extends Equatable {
     nextPage,
     hasReachedMax,
     isLoadingMore,
+    totalCount,
     errorMessage,
   ];
 }

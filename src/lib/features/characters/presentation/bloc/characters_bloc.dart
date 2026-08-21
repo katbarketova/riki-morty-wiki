@@ -46,6 +46,7 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
             clearNextPage: charactersPage.nextPage == null,
             hasReachedMax: charactersPage.hasReachedMax,
             isLoadingMore: false,
+            totalCount: charactersPage.totalCount,
             clearErrorMessage: true,
           ),
         );

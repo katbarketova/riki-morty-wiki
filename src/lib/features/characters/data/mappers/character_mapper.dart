@@ -23,6 +23,7 @@ extension CharactersResponseMapper on CharactersResponseDto {
       characters: results.map((character) => character.toEntity()).toList(),
       nextPage: hasReachedMax ? null : requestedPage + 1,
       hasReachedMax: hasReachedMax,
+      totalCount: info.count ?? 0,
     );
   }
 }

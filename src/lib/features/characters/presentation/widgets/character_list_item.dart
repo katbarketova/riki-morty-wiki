@@ -9,50 +9,83 @@ class CharacterListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final name = character.name ?? 'Unknown character';
-    final status = character.status ?? 'Unknown';
     final species = character.species ?? 'Unknown species';
     final image = character.image;
 
     return ListTile(
-      leading: ClipRRect(
-        borderRadius: BorderRadius.circular(8),
-        child: SizedBox.square(
-          dimension: 56,
-          child: image == null
-              ? const ColoredBox(
-                  color: Colors.black12,
-                  child: Icon(Icons.person_outline),
-                )
-              : CachedNetworkImage(
-                  imageUrl: image,
-                  fit: BoxFit.cover,
-                  placeholder: (context, url) => const ColoredBox(
-                    color: Colors.black12,
-                    child: Center(
-                      child: SizedBox.square(
-                        dimension: 20,
-                        child: CircularProgressIndicator(strokeWidth: 2),
+      leading: _CharacterImage(imageUrl: image, status: character.status),
+      title: Text(name, maxLines: 1, overflow: TextOverflow.ellipsis),
+      subtitle: Text(species, maxLines: 1, overflow: TextOverflow.ellipsis),
+    );
+  }
+}
+
+class _CharacterImage extends StatelessWidget {
+  const _CharacterImage({required this.imageUrl, required this.status});
+
+  final String? imageUrl;
+  final String? status;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox.square(
+      dimension: 56,
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          Positioned.fill(
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: imageUrl == null
+                  ? const ColoredBox(
+                      color: Colors.black12,
+                      child: Icon(Icons.person_outline),
+                    )
+                  : CachedNetworkImage(
+                      imageUrl: imageUrl!,
+                      fit: BoxFit.cover,
+                      placeholder: (context, url) => const ColoredBox(
+                        color: Colors.black12,
+                        child: Center(
+                          child: SizedBox.square(
+                            dimension: 20,
+                            child: CircularProgressIndicator(strokeWidth: 2),
+                          ),
+                        ),
+                      ),
+                      errorWidget: (context, url, error) => const ColoredBox(
+                        color: Colors.black12,
+                        child: Icon(Icons.person_outline),
                       ),
                     ),
-                  ),
-                  errorWidget: (context, url, error) => const ColoredBox(
-                    color: Colors.black12,
-                    child: Icon(Icons.person_outline),
-                  ),
+            ),
+          ),
+          Positioned(
+            right: 2,
+            bottom: 2,
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                color: _statusColor(status),
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: Theme.of(context).colorScheme.surface,
+                  width: 2,
                 ),
-        ),
+              ),
+              child: const SizedBox.square(dimension: 14),
+            ),
+          ),
+        ],
       ),
-      title: Text(name, maxLines: 1, overflow: TextOverflow.ellipsis),
-      subtitle: Text(
-        '$status - $species',
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-      ),
-      trailing: character.id == null
-          ? null
-          : Text('#${character.id}', style: theme.textTheme.labelMedium),
     );
+  }
+
+  Color _statusColor(String? status) {
+    return switch (status?.toLowerCase()) {
+      'alive' => Colors.green,
+      'dead' => Colors.red,
+      _ => Colors.grey,
+    };
   }
 }

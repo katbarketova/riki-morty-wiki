@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:iconify_flutter_plus/iconify_flutter_plus.dart';
+import 'package:iconify_flutter_plus/icons/mdi.dart';
 import 'package:riki_morty_wiki/core/di/service_locator.dart';
 import 'package:riki_morty_wiki/features/characters/presentation/bloc/characters_bloc.dart';
 import 'package:riki_morty_wiki/features/characters/presentation/bloc/characters_event.dart';
@@ -46,7 +48,22 @@ class _CharactersViewState extends State<CharactersView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Rick and Morty')),
+      appBar: AppBar(
+        title: BlocBuilder<CharactersBloc, CharactersState>(
+          buildWhen: (previous, current) =>
+              previous.totalCount != current.totalCount,
+          builder: (context, state) {
+            return Row(
+              children: [
+                const Text('Rick and Morty'),
+                const SizedBox(width: 12),
+                if (state.totalCount > 0)
+                  _CharactersCount(totalCount: state.totalCount),
+              ],
+            );
+          },
+        ),
+      ),
       body: BlocBuilder<CharactersBloc, CharactersState>(
         builder: (context, state) {
           return switch (state.status) {
@@ -110,6 +127,32 @@ class _CharactersViewState extends State<CharactersView> {
     final currentScroll = _scrollController.offset;
 
     return currentScroll >= maxScroll * 0.9;
+  }
+}
+
+class _CharactersCount extends StatelessWidget {
+  const _CharactersCount({required this.totalCount});
+
+  final int totalCount;
+
+  @override
+  Widget build(BuildContext context) {
+    final color = Theme.of(context).colorScheme.primary;
+
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Iconify(Mdi.alien, color: color, size: 20),
+        const SizedBox(width: 4),
+        Text(
+          '$totalCount',
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+            color: color,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+      ],
+    );
   }
 }
 
