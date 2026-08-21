@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:riki_morty_wiki/features/characters/domain/entities/character_entity.dart';
 
 part 'character_dto.g.dart';
 
@@ -15,7 +14,7 @@ class CharacterDto {
     this.image,
   });
 
-  final String? id;
+  final int? id;
   final String? name;
   final String? status;
   final String? species;
@@ -27,14 +26,4 @@ class CharacterDto {
       _$CharacterDtoFromJson(json);
 
   Map<String, dynamic> toJson() => _$CharacterDtoToJson(this);
-
-  CharacterEntity toEntity() => CharacterEntity(
-    id: id,
-    name: name,
-    status: status,
-    species: species,
-    type: type,
-    gender: gender,
-    image: image,
-  );
 }

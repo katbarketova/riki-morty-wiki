@@ -7,7 +7,7 @@ part of 'character_dto.dart';
 // **************************************************************************
 
 CharacterDto _$CharacterDtoFromJson(Map<String, dynamic> json) => CharacterDto(
-  id: json['id'] as String?,
+  id: (json['id'] as num?)?.toInt(),
   name: json['name'] as String?,
   status: json['status'] as String?,
   species: json['species'] as String?,

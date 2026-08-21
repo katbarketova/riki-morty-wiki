@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:riki_morty_wiki/core/di/service_locator.dart';
+import 'package:riki_morty_wiki/features/characters/presentation/pages/characters_page.dart';
 
 void main() {
+  setupDependencies();
   runApp(const MyApp());
 }
 
@@ -12,9 +15,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Riki and Morty',
       theme: ThemeData(
-        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: Container(),
+      home: const CharactersPage(),
     );
   }
 }
