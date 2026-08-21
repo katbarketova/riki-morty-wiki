@@ -13,12 +13,24 @@ class CharactersRepository implements ICharactersRepository {
   @override
   Future<DataState<CharactersPageEntity>> getCharacters({
     required int page,
+    String? name,
   }) async {
     try {
-      final response = await _api.getCharacters(page);
+      final response = await _api.getCharacters(page, name);
 
       return DataSuccess(data: response.toEntity(requestedPage: page));
     } on DioException catch (error) {
+      if (error.response?.statusCode == 404) {
+        return const DataSuccess(
+          data: CharactersPageEntity(
+            characters: [],
+            nextPage: null,
+            hasReachedMax: true,
+            totalCount: 0,
+          ),
+        );
+      }
+
       return DataError(error: error);
     }
   }

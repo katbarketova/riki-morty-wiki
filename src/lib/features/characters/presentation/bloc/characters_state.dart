@@ -12,6 +12,7 @@ class CharactersState extends Equatable {
     this.isLoadingMore = false,
     this.isLoadMoreRetryRequired = false,
     this.totalCount = 0,
+    this.searchName = '',
     this.errorMessage,
   });
 
@@ -22,6 +23,7 @@ class CharactersState extends Equatable {
   final bool isLoadingMore;
   final bool isLoadMoreRetryRequired;
   final int totalCount;
+  final String searchName;
   final String? errorMessage;
 
   CharactersState copyWith({
@@ -33,6 +35,7 @@ class CharactersState extends Equatable {
     bool? isLoadingMore,
     bool? isLoadMoreRetryRequired,
     int? totalCount,
+    String? searchName,
     String? errorMessage,
     bool clearErrorMessage = false,
   }) {
@@ -45,6 +48,7 @@ class CharactersState extends Equatable {
       isLoadMoreRetryRequired:
           isLoadMoreRetryRequired ?? this.isLoadMoreRetryRequired,
       totalCount: totalCount ?? this.totalCount,
+      searchName: searchName ?? this.searchName,
       errorMessage: clearErrorMessage
           ? null
           : errorMessage ?? this.errorMessage,
@@ -60,6 +64,7 @@ class CharactersState extends Equatable {
     isLoadingMore,
     isLoadMoreRetryRequired,
     totalCount,
+    searchName,
     errorMessage,
   ];
 }

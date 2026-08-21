@@ -9,6 +9,6 @@ class GetCharactersUseCase {
   final ICharactersRepository _repository;
 
   Future<DataState<CharactersPageEntity>> call(GetCharactersParams params) {
-    return _repository.getCharacters(page: params.page);
+    return _repository.getCharacters(page: params.page, name: params.name);
   }
 }

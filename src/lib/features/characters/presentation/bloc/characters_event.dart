@@ -7,3 +7,9 @@ class CharactersFetchRequested extends CharactersEvent {
 
   final bool force;
 }
+
+class CharactersSearchChanged extends CharactersEvent {
+  const CharactersSearchChanged(this.name);
+
+  final String name;
+}

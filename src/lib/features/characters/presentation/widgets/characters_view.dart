@@ -56,9 +56,28 @@ class _CharactersViewState extends State<CharactersView> {
             return Row(
               children: [
                 const Text('Wiki'),
-                const Spacer(),
-                if (state.totalCount > 0)
-                  CharactersCount(totalCount: state.totalCount),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: SizedBox(
+                    height: 40,
+                    child: TextField(
+                      onChanged: (value) => context.read<CharactersBloc>().add(
+                        CharactersSearchChanged(value),
+                      ),
+                      textInputAction: TextInputAction.search,
+                      decoration: const InputDecoration(
+                        hintText: 'Search by name',
+                        prefixIcon: Icon(Icons.search),
+                        contentPadding: EdgeInsets.symmetric(horizontal: 12),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 16),
+                CharactersCount(totalCount: state.totalCount),
               ],
             );
           },
