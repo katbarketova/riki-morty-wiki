@@ -6,6 +6,7 @@ import 'package:riki_morty_wiki/features/characters/presentation/bloc/characters
 import 'package:riki_morty_wiki/features/characters/presentation/bloc/characters_effect.dart';
 import 'package:riki_morty_wiki/features/characters/presentation/bloc/characters_event.dart';
 import 'package:riki_morty_wiki/features/characters/presentation/bloc/characters_state.dart';
+import 'package:riki_morty_wiki/features/characters/presentation/pages/character_details_page.dart';
 import 'package:riki_morty_wiki/features/characters/presentation/widgets/character_list_item.dart';
 import 'package:riki_morty_wiki/features/characters/presentation/widgets/characters_count.dart';
 import 'package:riki_morty_wiki/features/characters/presentation/widgets/characters_error_snack_bar.dart';
@@ -111,7 +112,17 @@ class _CharactersViewState extends State<CharactersView> {
                   );
                 }
 
-                return CharacterListItem(character: state.characters[index]);
+                final character = state.characters[index];
+
+                return CharacterListItem(
+                  character: character,
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute<void>(
+                      builder: (_) =>
+                          CharacterDetailsPage(character: character),
+                    ),
+                  ),
+                );
               },
             ),
           };
