@@ -243,6 +243,11 @@ part 'character_dto.g.dart';
 - Prefer `const` constructors and widgets where useful.
 - Keep widgets focused and composable.
 - Extract repeated or substantial UI into widgets.
+- Prefer one public Widget class per file. Do not keep multiple
+  `StatelessWidget` or `StatefulWidget` classes in the same file.
+- Extract reusable, substantial, or independently meaningful widgets into
+  separate files under the feature's `presentation/widgets` directory.
+- A private `State<T>` class may stay in the same file as its `StatefulWidget`.
 - Use trailing commas where they improve formatting.
 - Avoid unnecessary abstractions and redundant variables.
 - Document only public APIs or non-obvious decisions. Do not add comments that

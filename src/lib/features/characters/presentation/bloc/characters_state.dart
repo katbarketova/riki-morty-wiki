@@ -10,6 +10,7 @@ class CharactersState extends Equatable {
     this.nextPage = 1,
     this.hasReachedMax = false,
     this.isLoadingMore = false,
+    this.isLoadMoreRetryRequired = false,
     this.totalCount = 0,
     this.errorMessage,
   });
@@ -19,6 +20,7 @@ class CharactersState extends Equatable {
   final int? nextPage;
   final bool hasReachedMax;
   final bool isLoadingMore;
+  final bool isLoadMoreRetryRequired;
   final int totalCount;
   final String? errorMessage;
 
@@ -29,6 +31,7 @@ class CharactersState extends Equatable {
     bool clearNextPage = false,
     bool? hasReachedMax,
     bool? isLoadingMore,
+    bool? isLoadMoreRetryRequired,
     int? totalCount,
     String? errorMessage,
     bool clearErrorMessage = false,
@@ -39,6 +42,8 @@ class CharactersState extends Equatable {
       nextPage: clearNextPage ? null : nextPage ?? this.nextPage,
       hasReachedMax: hasReachedMax ?? this.hasReachedMax,
       isLoadingMore: isLoadingMore ?? this.isLoadingMore,
+      isLoadMoreRetryRequired:
+          isLoadMoreRetryRequired ?? this.isLoadMoreRetryRequired,
       totalCount: totalCount ?? this.totalCount,
       errorMessage: clearErrorMessage
           ? null
@@ -53,6 +58,7 @@ class CharactersState extends Equatable {
     nextPage,
     hasReachedMax,
     isLoadingMore,
+    isLoadMoreRetryRequired,
     totalCount,
     errorMessage,
   ];

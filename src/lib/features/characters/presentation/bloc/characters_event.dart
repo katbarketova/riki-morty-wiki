@@ -3,5 +3,7 @@ sealed class CharactersEvent {
 }
 
 class CharactersFetchRequested extends CharactersEvent {
-  const CharactersFetchRequested();
+  const CharactersFetchRequested({this.force = false});
+
+  final bool force;
 }
