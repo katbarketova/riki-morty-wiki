@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:riki_morty_wiki/features/characters/presentation/utils/character_status_view_data.dart';
 
 class CharacterImage extends StatelessWidget {
   const CharacterImage({
@@ -50,7 +51,7 @@ class CharacterImage extends StatelessWidget {
             bottom: 2,
             child: DecoratedBox(
               decoration: BoxDecoration(
-                color: _statusColor(status),
+                color: characterStatusColor(status),
                 shape: BoxShape.circle,
                 border: Border.all(
                   color: Theme.of(context).colorScheme.surface,
@@ -63,13 +64,5 @@ class CharacterImage extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  Color _statusColor(String? status) {
-    return switch (status?.toLowerCase()) {
-      'alive' => Colors.green,
-      'dead' => Colors.red,
-      _ => Colors.grey,
-    };
   }
 }
